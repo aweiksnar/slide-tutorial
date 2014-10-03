@@ -1,66 +1,185 @@
 ;(function(){
-    var html;
-    html = 
-        "<div class='slide-tutorial-container'>" +
-            "<button class='slide-tutorial-close'>&times;</button>" +
-            "<div class='slide-tutorial-slides'>" +
-                "<div class='slide-tutorial-slide'>" + 
-                    "<div>hello!</div>" +
-                "</div>" +
-            "</div>" +
-            "<button class='slide-tutorial-next-button'>Next</button>"+
-            "<div class='slide-tutorial-dots'></div>" +
-        "</div>";
-
+    /* Constructor */
     function SlideTutorial (slides) {
+        this._create()
+
         this.slides = slides;
-        this.numberOfSlides = this.slides.length;
         this.el = document.querySelector('.slide-tutorial');
-        this.nextButton = document.querySelector('.slide-tutorial-next-button');
-        
-        this.nextButton.addEventListener('click', this.onClickNextButton)
-        this.createSlides()
-        this.createDots()
+        this.nextButton = this.el.querySelector('.slide-tutorial-next-button');
+        this.closeButton = this.el.querySelector('.slide-tutorial-close-button');
+        this.slidesContainer = this.el.querySelector('.slide-tutorial-slides');
+        this.dotsContainer = this.el.querySelector('.slide-tutorial-dots');
+
+        this.el.addEventListener('click', this.exitIfClickOutside.bind(this))
+        this.nextButton.addEventListener('click', this.onClickNextButton.bind(this));
+        this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
+
+        this._createSlides();
+        this._createDots();
+
+        return;
     };
     
-    SlideTutorial.container = document.createElement('div');
-    SlideTutorial.container.innerHTML = html;
-    SlideTutorial.container.className = 'slide-tutorial';
-    document.body.appendChild(SlideTutorial.container);
+    /* Public */
+    SlideTutorial.prototype.start = function() {
+        this.setSlide(0); // start on first slide
 
-    SlideTutorial.prototype.onClickNextButton = function(e) {
-        console.log(e);
+        this.addClass('active', this.el);
+        return;
     };
 
-    SlideTutorial.prototype.slidesContainerContent = function() {
-        return this.slides.map(function(slide) {
+    SlideTutorial.prototype.finish = function() {
+        this.removeClass('active', this.el);
+        return;
+    };
+
+    SlideTutorial.prototype.setSlide = function(i) {
+        this.activeSlide = i;
+        this._displaySlide(this.activeSlide);
+        return;
+    }
+    
+    /* DOM Manipulation Helpers */
+    SlideTutorial.prototype.addMultipleEventListeners = function(eventType, nodeList, handler) {
+        var i;
+        var nodes;
+        nodes = nodeList;
+        for (i = 0; i < nodeList.length; i++) {
+            nodeList[i].addEventListener(eventType, handler.bind(this));
+        }
+        return;
+    };
+
+    SlideTutorial.prototype.elemIndex = function(elem) {
+        var i = 0;
+        var elem = elem
+        while (elem = elem.previousSibling) {i++;}
+        return i;
+    };
+
+    SlideTutorial.prototype.addClass = function(className, elem) {
+        if (!!~elem.className.indexOf(className)) return;
+        elem.className += (' ' + className);
+        return;
+    };
+
+    SlideTutorial.prototype.removeClass = function(className, elem) {
+        var elem = elem;
+        elem.className = elem.className.replace(className, '');
+        return;
+    };
+
+    SlideTutorial.prototype.clearActiveChildren = function(elem) {
+        var i, childs;
+        childs = elem.childNodes;
+        for (i = 0; i < childs.length; i++) {
+            this.removeClass('active', childs[i]);
+        }
+        return;
+    };
+
+    /* Event Handlers */
+    SlideTutorial.prototype.onClickNextButton = function(e) {
+        if (this.activeSlide < this.slides.length - 1) {
+            this.setSlide(this.activeSlide + 1);
+        } else {
+         this.finish();
+        }
+        return;
+    };
+
+    SlideTutorial.prototype.onClickDot = function(e) {
+        var clickedDotIndex;
+        clickedDotIndex = this.elemIndex(e.target);
+        this.setSlide(clickedDotIndex);
+        return;
+    };
+
+    SlideTutorial.prototype.onClickCloseButton = function(e) {
+        this.finish();
+        return;
+    };
+
+    SlideTutorial.prototype.exitIfClickOutside = function(e) {
+        if (e.target === this.el) this.finish();
+        return;
+    };
+
+    /* Private : display */
+    SlideTutorial.prototype._displaySlide = function(i) {
+        var slideToActivate, dotToActivate;
+
+        slideToActivate = this.slidesContainer.querySelector('.slide-tutorial-slide-' + i);
+        dotToActivate = this.dotsContainer.querySelector('.slide-tutorial-dot-' + i);
+        
+        this.clearActiveChildren(this.slidesContainer);
+        this.clearActiveChildren(this.dotsContainer);
+        
+        this.addClass('active', slideToActivate);
+        this.addClass('active', dotToActivate);
+
+        return;
+    };
+
+    /* Private : initialization / element creation */
+    SlideTutorial.prototype._slidesContainerContent = function() {
+        return(this.slides.map(function(slide, i) {
              return(
-                 "<div class='slide-tutorial-slide'>" +
-                     "<div class='slide-tutorial-slide-top'></div>" +
+                 "<div class='slide-tutorial-slide slide-tutorial-slide-" + i +"'>" +
+                     "<div class='slide-tutorial-slide-top'>" +
                        "<img src='" + slide.image + "'/>" +
+                     "</div>" +
                      "<div class='slide-tutorial-slide-bottom'>" +
                        "<h1>" + slide.title + "</h1>" +
                        "<p>" + slide.content + "</p>" +
                      "</div>" +
                  "</div>"
              );
-        }).join("");
+        }).join(""));
     };
 
-    SlideTutorial.prototype.createSlides = function() {
+    SlideTutorial.prototype._createSlides = function() {
         this.el.querySelector('.slide-tutorial-slides')
-            .innerHTML = this.slidesContainerContent();
+            .innerHTML = this._slidesContainerContent();
+        return;
     };
 
-    SlideTutorial.prototype.createDots = function() {
+    SlideTutorial.prototype._createDots = function() {
         var dotsContent
-        dotsContent = this.slides.map(function(slide){return ("<div class='dot'></div>")}).join("");
+
+        dotsContent = this.slides.map(function(slide, i){
+            return ("<div class='slide-tutorial-dot slide-tutorial-dot-" + i + "'></div>")
+        }).join("");
 
         this.el.querySelector('.slide-tutorial-dots')
             .innerHTML = dotsContent;
+
+        this.dots = this.el.querySelectorAll('.slide-tutorial-dot');
+        this.addMultipleEventListeners('click', this.dots, this.onClickDot);
+        return;
     };
+
+    SlideTutorial.prototype._create = function() {
+        var html, container;
+        html =
+            "<div class='slide-tutorial-container'>" +
+                "<button class='slide-tutorial-close-button'>&times;</button>" +
+                "<div class='slide-tutorial-slides'></div>" +
+                "<div class='slide-tutorial-button-container'>" +
+                    "<button class='slide-tutorial-next-button'>Next</button>" +
+                "</div>" +
+                "<div class='slide-tutorial-dots'></div>" +
+            "</div>";
+
+        container = document.createElement('div');
+        container.innerHTML = html;
+        container.className = 'slide-tutorial';
+        document.body.appendChild(container);
+        return;
+    }
 
     window.SlideTutorial = SlideTutorial;
     if (typeof module !== 'undefined') module.exports = SlideTutorial;
     if (typeof define !== 'undefined') define(function() {return SlideTutorial;});
+
 })(this);

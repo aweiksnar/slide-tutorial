@@ -1,11 +1,8 @@
 {
   "name": "slide-tutorial",
   "version": "0.0.1",
-  "description": "click through slides of images & text",
+  "description": "click through slides of images & text in a fullscreen window",
   "main": "slide-tutorial.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "alex weiksnar",
   "license": "ISC"
 }

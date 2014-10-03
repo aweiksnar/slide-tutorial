@@ -6,15 +6,20 @@
     <link rel="stylesheet" href="./slide-tutorial.css">
   </head>
   <body>
-
+    <h1>Slide Tutorial</h1>
+    <button id='open-slide-tutorial'>Open</button>
   </body>
   
   <script src="./slide-tutorial.js"></script>
   <script type="text/javascript">
       var slideTutorial = new SlideTutorial([
-          {image: 'http://placehold.it/400X200/green&text=slide%201', title: 'Welcome', content: 'first'},
-          {image: 'http://placehold.it/400X200/green&text=slide%202', title: 'Second Slide', content: 'second'},
-          {image: 'http://placehold.it/400X200/green&text=slide%203', title: 'Third Slide', content: 'third'}
+          {image: 'http://placehold.it/400X200/green&text=slide%201', title: 'Welcome', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
+          {image: 'http://placehold.it/400X200/green&text=slide%202', title: 'Second Slide', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
+          {image: 'http://placehold.it/400X200/green&text=slide%203', title: 'Third Slide', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
       ]);
+      window.st = slideTutorial
+
+      document.getElementById('open-slide-tutorial')
+        .addEventListener('click', function() {slideTutorial.start()}, false)
   </script>
 </html>
