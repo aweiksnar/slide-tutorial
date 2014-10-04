@@ -2,9 +2,10 @@
     /*
      Constructor
      - Pass in an object with a
-         - mandatory 'slides' key
-         - optional 'nextButtonText' key
-         - optional 'finishButtonText' key
+         - mandatory 'slides' array of objects
+             [{image: 'string (url or path)', title: 'string', content: 'string'}]
+         - optional 'nextButtonText' string
+         - optional 'finishButtonText' string
      - Example: new SlideTutorial({slides: ..., nextButtonText: ...})
      */
     function SlideTutorial (options) {
