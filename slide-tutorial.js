@@ -1,7 +1,7 @@
 ;(function(){
     /* Constructor */
     function SlideTutorial (slides) {
-        this._create()
+        this._create();
 
         this.slides = slides;
         this.el = document.querySelector('.slide-tutorial');
@@ -10,7 +10,7 @@
         this.slidesContainer = this.el.querySelector('.slide-tutorial-slides');
         this.dotsContainer = this.el.querySelector('.slide-tutorial-dots');
 
-        this.el.addEventListener('click', this.exitIfClickOutside.bind(this))
+        this.el.addEventListener('click', this.exitIfClickOutside.bind(this));
         this.nextButton.addEventListener('click', this.onClickNextButton.bind(this));
         this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
 
@@ -23,7 +23,6 @@
     /* Public */
     SlideTutorial.prototype.start = function() {
         this.setSlide(0); // start on first slide
-
         this.addClass('active', this.el);
         return;
     };
@@ -37,7 +36,7 @@
         this.activeSlide = i;
         this._displaySlide(this.activeSlide);
         return;
-    }
+    };
     
     /* DOM Manipulation Helpers */
     SlideTutorial.prototype.addMultipleEventListeners = function(eventType, nodeList, handler) {
@@ -52,8 +51,8 @@
 
     SlideTutorial.prototype.elemIndex = function(elem) {
         var i = 0;
-        var elem = elem
-        while (elem = elem.previousSibling) {i++;}
+        var elem = elem;
+        while (elem = elem.previousSibling) {i++;};
         return i;
     };
 
@@ -145,10 +144,10 @@
     };
 
     SlideTutorial.prototype._createDots = function() {
-        var dotsContent
+        var dotsContent;
 
         dotsContent = this.slides.map(function(slide, i){
-            return ("<div class='slide-tutorial-dot slide-tutorial-dot-" + i + "'></div>")
+            return ("<div class='slide-tutorial-dot slide-tutorial-dot-" + i + "'></div>");
         }).join("");
 
         this.el.querySelector('.slide-tutorial-dots')
@@ -176,7 +175,7 @@
         container.className = 'slide-tutorial';
         document.body.appendChild(container);
         return;
-    }
+    };
 
     window.SlideTutorial = SlideTutorial;
     if (typeof module !== 'undefined') module.exports = SlideTutorial;
