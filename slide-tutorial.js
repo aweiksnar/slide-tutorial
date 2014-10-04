@@ -40,8 +40,7 @@
     
     /* DOM Manipulation Helpers */
     SlideTutorial.prototype.addMultipleEventListeners = function(eventType, nodeList, handler) {
-        var i;
-        var nodes;
+        var nodes, i;
         nodes = nodeList;
         for (i = 0; i < nodeList.length; i++) {
             nodeList[i].addEventListener(eventType, handler.bind(this));
@@ -50,8 +49,7 @@
     };
 
     SlideTutorial.prototype.elemIndex = function(elem) {
-        var i = 0;
-        var elem = elem;
+        var i = 0, elem = elem;
         while (elem = elem.previousSibling) {i++;};
         return i;
     };
@@ -144,7 +142,7 @@
     };
 
     SlideTutorial.prototype._createDots = function() {
-        var dotsContent;
+        var dots, dotsContent;
 
         dotsContent = this.slides.map(function(slide, i){
             return ("<div class='slide-tutorial-dot slide-tutorial-dot-" + i + "'></div>");
@@ -153,8 +151,8 @@
         this.el.querySelector('.slide-tutorial-dots')
             .innerHTML = dotsContent;
 
-        this.dots = this.el.querySelectorAll('.slide-tutorial-dot');
-        this.addMultipleEventListeners('click', this.dots, this.onClickDot);
+        dots = this.el.querySelectorAll('.slide-tutorial-dot');
+        this.addMultipleEventListeners('click', dots, this.onClickDot);
         return;
     };
 
