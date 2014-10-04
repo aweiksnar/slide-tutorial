@@ -1,25 +1,34 @@
 ;(function(){
-    /* Constructor */
-    function SlideTutorial (slides) {
+    /*
+     Constructor
+     - Pass in an object with a
+         - mandatory 'slides' key
+         - optional 'nextButtonText' key
+         - optional 'finishButtonText' key
+     - Example: new SlideTutorial({slides: ..., nextButtonText: ...})
+     */
+    function SlideTutorial (options) {
+        this._setConfig(options);
         this._create();
 
-        this.slides = slides;
+        this.slides = options.slides;
+
         this.el = document.querySelector('.slide-tutorial');
         this.nextButton = this.el.querySelector('.slide-tutorial-next-button');
         this.closeButton = this.el.querySelector('.slide-tutorial-close-button');
         this.slidesContainer = this.el.querySelector('.slide-tutorial-slides');
         this.dotsContainer = this.el.querySelector('.slide-tutorial-dots');
 
-        this.el.addEventListener('click', this.exitIfClickOutside.bind(this));
-        this.nextButton.addEventListener('click', this.onClickNextButton.bind(this));
-        this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
+        this.el.addEventListener('click', this.exitIfClickOutside.bind(this), false);
+        this.nextButton.addEventListener('click', this.onClickNextButton.bind(this), false);
+        this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this), false);
 
         this._createSlides();
         this._createDots();
 
         return;
     };
-    
+
     /* Public */
     SlideTutorial.prototype.start = function() {
         this.setSlide(0); // start on first slide
@@ -37,20 +46,20 @@
         this._displaySlide(this.activeSlide);
         return;
     };
-    
+
     /* DOM Manipulation Helpers */
     SlideTutorial.prototype.addMultipleEventListeners = function(eventType, nodeList, handler) {
         var nodes, i;
         nodes = nodeList;
         for (i = 0; i < nodeList.length; i++) {
-            nodeList[i].addEventListener(eventType, handler.bind(this));
+            nodeList[i].addEventListener(eventType, handler.bind(this), false);
         }
         return;
     };
 
     SlideTutorial.prototype.elemIndex = function(elem) {
         var i = 0, elem = elem;
-        while (elem = elem.previousSibling) {i++;};
+        while (elem = elem.previousSibling) i++;
         return i;
     };
 
@@ -108,17 +117,34 @@
 
         slideToActivate = this.slidesContainer.querySelector('.slide-tutorial-slide-' + i);
         dotToActivate = this.dotsContainer.querySelector('.slide-tutorial-dot-' + i);
-        
+
         this.clearActiveChildren(this.slidesContainer);
         this.clearActiveChildren(this.dotsContainer);
-        
+
         this.addClass('active', slideToActivate);
         this.addClass('active', dotToActivate);
+
+        this.nextButton.innerHTML =
+            (i === this.slides.length - 1) ? this.finishButtonText : this.nextButtonText
 
         return;
     };
 
     /* Private : initialization / element creation */
+    SlideTutorial.prototype._valOrDefault = function(val, def) {
+        return((val) ? val : def);
+    }
+
+    SlideTutorial.prototype._setConfig = function(opts) {
+        var defaultNextText = 'Next', defaultFinishText = 'Finish';
+
+        this.nextButtonText =
+            this._valOrDefault(opts.nextButtonText, defaultNextText)
+
+        this.finishButtonText =
+            this._valOrDefault(opts.finishButtonText, defaultFinishText);
+    }
+
     SlideTutorial.prototype._slidesContainerContent = function() {
         return(this.slides.map(function(slide, i) {
              return(
@@ -163,7 +189,9 @@
                 "<button class='slide-tutorial-close-button'>&times;</button>" +
                 "<div class='slide-tutorial-slides'></div>" +
                 "<div class='slide-tutorial-button-container'>" +
-                    "<button class='slide-tutorial-next-button'>Next</button>" +
+                    "<button class='slide-tutorial-next-button'>" +
+                       this.nextButtonText +
+                    "</button>" +
                 "</div>" +
                 "<div class='slide-tutorial-dots'></div>" +
             "</div>";
