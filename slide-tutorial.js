@@ -6,6 +6,7 @@
              [{image: 'string (url or path)', title: 'string', content: 'string'}]
          - optional 'nextButtonText' string
          - optional 'finishButtonText' string
+         - optional 'closeButtonText' string
      - Example: new SlideTutorial({slides: ..., nextButtonText: ...})
      */
     function SlideTutorial (options) {
