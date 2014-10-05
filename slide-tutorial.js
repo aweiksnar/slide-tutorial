@@ -215,5 +215,4 @@
     window.SlideTutorial = SlideTutorial;
     if (typeof module !== 'undefined') module.exports = SlideTutorial;
     if (typeof define !== 'undefined') define(function() {return SlideTutorial;});
-
 })(this);

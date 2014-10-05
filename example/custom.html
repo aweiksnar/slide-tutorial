@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Slide Tutorial Example</title>
+    <link rel="stylesheet" href="../slide-tutorial.css">
+    <style type="text/css" media="screen">
+      .slide-tutorial {
+        font-family: monospace, sans-serif;
+        background: rgba(31, 93, 153, 0.7);
+        opacity: 0.0;
+      }
+      
+      .slide-tutorial.active {
+        opacity: 1.0;
+        transition: opacity 1s;
+      }
+      
+      .slide-tutorial .slide-tutorial-container {
+        box-shadow: 10px 10px rgba(34, 34, 34, 0.540);
+      }
+
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-close-button {
+        background: none;
+        border: none;
+        outline: none;
+        color: #fff;
+      }
+
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-dots .slide-tutorial-dot {
+        height: 12px;
+        width: 12px;
+        margin: 2px;
+      }
+      
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-dots .slide-tutorial-dot.active {
+        background: rgb(255, 71, 0);
+      }
+      
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-button-container .slide-tutorial-next-button {
+        background: rgb(255, 71, 0);
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        width: 150px;
+        outline: none;
+        font-size: 14px;
+        color: #fff;
+      }
+      
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-slide .slide-tutorial-slide-bottom p {
+        color: grey;
+        line-height: 1.3em;
+      }
+
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-slide .slide-tutorial-slide-bottom h1 {
+        color: grey;
+        font-size: 24px;
+      }
+      
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-slide .slide-tutorial-slide-top {
+        max-height: 270px;
+      }
+
+      .slide-tutorial .slide-tutorial-container .slide-tutorial-slide .slide-tutorial-slide-bottom {
+        max-height: 270px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Slide Tutorial</h1>
+    <button id='open-slide-tutorial'>Open</button>
+  </body>
+  
+  <script src="../slide-tutorial.js"></script>
+  <script type="text/javascript">
+      var slideTutorial = new SlideTutorial({slides: [
+          {image: 'http://placehold.it/400X200/green&text=slide%201', title: 'Welcome', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
+          {image: 'http://placehold.it/400X200/green&text=slide%202', title: 'Second Slide', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'},
+          {image: 'http://placehold.it/400X200/green&text=slide%203', title: 'Third Slide', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
+      ], nextButtonText: 'Continue', finishButtonText: 'Get Started'});
+
+      document.getElementById('open-slide-tutorial')
+        .addEventListener('click', function() {slideTutorial.start()}, false)
+
+  </script>
+</html>
