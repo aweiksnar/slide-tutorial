@@ -1,8 +1,13 @@
 {
-  "name": "slide-tutorial",
-  "version": "0.0.1",
-  "description": "click through slides of images & text in a fullscreen window",
-  "main": "slide-tutorial.js",
-  "author": "alex weiksnar",
-  "license": "ISC"
+    "name": "slide-tutorial",
+    "version": "0.0.1",
+    "description": "click through slides of images & text in a fullscreen modal window",
+    "repository" : {
+        "type": "git",
+        "url": "https://github.com/aweiksnar/slide-tutorial.git"
+    },
+    "keywords": ["tutorial", "modal", "slideshow"],
+    "main": "slide-tutorial.js",
+    "author": "alex weiksnar",
+    "license": "ISC"
 }
