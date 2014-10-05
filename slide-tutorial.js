@@ -144,13 +144,16 @@
     }
 
     SlideTutorial.prototype._setConfig = function(opts) {
-        var defaultNextText = 'Next', defaultFinishText = 'Finish';
+        var config = [
+            {prop: 'nextButtonText', defaultVal: 'Next'},
+            {prop: 'finishButtonText', defaultVal: 'Finish'},
+            {prop: 'closeButtonText', defaultVal:  '&times;'}
+        ]
 
-        this.nextButtonText =
-            this._valOrDefault(opts.nextButtonText, defaultNextText);
+        config.forEach(function(opt) {
+            this[opt.prop] = this._valOrDefault(opts[opt.prop], opt.defaultVal);
+        }.bind(this));
 
-        this.finishButtonText =
-            this._valOrDefault(opts.finishButtonText, defaultFinishText);
         return;
     }
 
@@ -195,7 +198,9 @@
         var html, container;
         html =
             "<div class='slide-tutorial-container'>" +
-                "<button class='slide-tutorial-close-button'>&times;</button>" +
+                "<button class='slide-tutorial-close-button'>" +
+                  this.closeButtonText +
+                "</button>" +
                 "<div class='slide-tutorial-slides'></div>" +
                 "<div class='slide-tutorial-button-container'>" +
                     "<button class='slide-tutorial-next-button'>" +
@@ -216,3 +221,5 @@
     if (typeof module !== 'undefined') module.exports = SlideTutorial;
     if (typeof define !== 'undefined') define(function() {return SlideTutorial;});
 })(this);
+
+

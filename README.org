@@ -23,7 +23,8 @@ slideTutorial.start()
 
 *** Customize:
 
-Pass in optional 'nextButtonText' and 'finishButtonText' keys to the constructor to override the default text.
+Pass in optional 'nextButtonText', 'finishButtonText', and 'closeButtonText' keys to the constructor to override the default text. 
+These set the innerHTML directly, so feel free to pass in icons and other tags as well.
 
 #+begin_src javascript
 var slideTutorial = new SlideTutorial({
@@ -33,7 +34,8 @@ var slideTutorial = new SlideTutorial({
       {image: './your-image-3.jpg', title: 'Third Slide', content: 'Some more content'}
   ], 
   nextButtonText: 'Continue', 
-  finishButtonText: 'Get Started'
+  finishButtonText: 'Get Started',
+  closeButtonText: 'Exit'
 });
 #+end_src
 
