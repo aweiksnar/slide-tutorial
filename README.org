@@ -2,3 +2,42 @@
 [[http://abcnews.go.com/images/Business/ht_slide_tester_1_dm_130425_wblog.jpg]]
 
 
+*** Setup:
+
+Create a new SlideTutorial and pass in an object with a 'slides' array of objects.
+Objects should have 'image', 'title', and 'content' keys.
+
+#+begin_src javascript
+var slideTutorial = new SlideTutorial({slides: [
+      {image: './your-image-1.jpg', title: 'Welcome', content: 'Some content'},
+      {image: './your-image-2.jpg', title: 'Second Slide', content: 'Some more content'},
+      {image: './your-image-3.jpg', title: 'Third Slide', content: 'Some more content'}
+]});
+#+end_src
+
+Call the start method when you want it to open
+
+#+begin_src javascript
+slideTutorial.start()
+#+end_src
+
+*** Customize:
+
+Pass in optional 'nextButtonText' and 'finishButtonText' keys to the constructor to override the default text.
+
+#+begin_src javascript
+var slideTutorial = new SlideTutorial({
+  slides: [
+      {image: './your-image-1.jpg', title: 'Welcome', content: 'Some content'},
+      {image: './your-image-2.jpg', title: 'Second Slide', content: 'Some more content'},
+      {image: './your-image-3.jpg', title: 'Third Slide', content: 'Some more content'}
+  ], 
+  nextButtonText: 'Continue', 
+  finishButtonText: 'Get Started'
+});
+#+end_src
+
+*** Examples: 
+[[https://github.com/aweiksnar/slide-tutorial/blob/master/example/default.html][default]]
+or
+[[https://github.com/aweiksnar/slide-tutorial/blob/master/example/custom.html][with custom css]]
