@@ -31,21 +31,28 @@
     };
 
     /* Public */
+
+    // .start : start the tutorial, probably the only instance method you'll need
+
     SlideTutorial.prototype.start = function() {
         this.setSlide(0); // start on first slide
         this.addClass('active', this.el);
-        return;
+        return this;
     };
+
+    // .finish : close the tutoral
 
     SlideTutorial.prototype.finish = function() {
         this.removeClass('active', this.el);
-        return;
+        return this;
     };
+
+    // .setSlide : go to a specific slide index
 
     SlideTutorial.prototype.setSlide = function(i) {
         this.activeSlide = i;
         this._displaySlide(this.activeSlide);
-        return;
+        return this;
     };
 
     /* DOM Manipulation Helpers */
