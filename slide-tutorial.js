@@ -133,7 +133,7 @@
         this.addClass('active', dotToActivate);
 
         this.nextButton.innerHTML =
-            (i === this.slides.length - 1) ? this.finishButtonText : this.nextButtonText
+            (i === this.slides.length - 1) ? this.finishButtonText : this.nextButtonText;
 
         return;
     };
@@ -147,10 +147,11 @@
         var defaultNextText = 'Next', defaultFinishText = 'Finish';
 
         this.nextButtonText =
-            this._valOrDefault(opts.nextButtonText, defaultNextText)
+            this._valOrDefault(opts.nextButtonText, defaultNextText);
 
         this.finishButtonText =
             this._valOrDefault(opts.finishButtonText, defaultFinishText);
+        return;
     }
 
     SlideTutorial.prototype._slidesContainerContent = function() {
