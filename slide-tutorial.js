@@ -142,21 +142,21 @@
     /* Private : initialization / element creation */
     SlideTutorial.prototype._valOrDefault = function(val, def) {
         return((val) ? val : def);
-    }
+    };
 
     SlideTutorial.prototype._setConfig = function(opts) {
         var config = [
             {prop: 'nextButtonText', defaultVal: 'Next'},
             {prop: 'finishButtonText', defaultVal: 'Finish'},
             {prop: 'closeButtonText', defaultVal:  '&times;'}
-        ]
+        ];
 
         config.forEach(function(opt) {
             this[opt.prop] = this._valOrDefault(opts[opt.prop], opt.defaultVal);
         }.bind(this));
 
         return;
-    }
+    };
 
     SlideTutorial.prototype._slidesContainerContent = function() {
         return(this.slides.map(function(slide, i) {
@@ -221,6 +221,4 @@
     window.SlideTutorial = SlideTutorial;
     if (typeof module !== 'undefined') module.exports = SlideTutorial;
     if (typeof define !== 'undefined') define(function() {return SlideTutorial;});
-})(this);
-
-
+}).call(this);
