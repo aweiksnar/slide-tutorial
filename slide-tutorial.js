@@ -56,6 +56,12 @@
         return this;
     };
 
+    // .destroy : remove from DOM
+
+    SlideTutorial.prototype.destroy = function(){
+        this.el.parentNode.removeChild(this.el)
+    };
+
     /* DOM Manipulation Helpers */
     SlideTutorial.prototype.addMultipleEventListeners = function(eventType, nodeList, handler) {
         var nodes, i;
