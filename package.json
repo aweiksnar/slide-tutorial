@@ -1,6 +1,6 @@
 {
     "name": "slide-tutorial",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "click through slides of images & text in a fullscreen modal window",
     "repository" : {
         "type": "git",
