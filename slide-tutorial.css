@@ -59,6 +59,8 @@
     width: 100%;
     overflow: auto;
     margin: 10px 0;
+    position: absolute;
+    bottom: 0;
 }
 
 .slide-tutorial .slide-tutorial-container .slide-tutorial-dots .slide-tutorial-dot {
@@ -78,6 +80,8 @@
 .slide-tutorial .slide-tutorial-container .slide-tutorial-button-container {
     width: 100%;
     text-align: center;
+    position: absolute;
+    bottom: 30px;
 }
 
 .slide-tutorial .slide-tutorial-container .slide-tutorial-button-container .slide-tutorial-next-button {
