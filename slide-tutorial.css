@@ -1,5 +1,6 @@
 .slide-tutorial {
-    display: none;
+    height: 0;
+    overflow: hidden;
     width: 100%;
     background: rgba(120, 120, 120, 0.7);
     position: fixed;
@@ -11,7 +12,7 @@
 }
 
 .slide-tutorial.active {
-    display: block;
+    height: auto;
 }
 
 .slide-tutorial .slide-tutorial-slide {
