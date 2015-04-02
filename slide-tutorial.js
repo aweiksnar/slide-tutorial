@@ -78,6 +78,11 @@
         return i;
     };
 
+    SlideTutorial.prototype.setDimension = function(elem, dimension, size) {
+        elem.style[dimension] = size + 'px';
+        return;
+    }
+
     SlideTutorial.prototype.addClass = function(className, elem) {
         if (!!~elem.className.indexOf(className)) return;
         elem.className += (' ' + className);
@@ -89,6 +94,15 @@
         elem.className = elem.className.replace(className, '');
         return;
     };
+
+    SlideTutorial.prototype.activateChildren = function(elem) {
+        var i, childs;
+        childs = elem.childNodes;
+        for (i = 0; i < childs.length; i++) {
+            this.addClass('active', childs[i]);
+        }
+        return;
+    }
 
     SlideTutorial.prototype.clearActiveChildren = function(elem) {
         var i, childs;
@@ -133,6 +147,7 @@
         slideToActivate = this.slidesContainer.querySelector('.slide-tutorial-slide-' + i);
         dotToActivate = this.dotsContainer.querySelector('.slide-tutorial-dot-' + i);
 
+
         this.clearActiveChildren(this.slidesContainer);
         this.clearActiveChildren(this.dotsContainer);
 
@@ -154,7 +169,8 @@
         var config = [
             {prop: 'nextButtonText', defaultVal: 'Next'},
             {prop: 'finishButtonText', defaultVal: 'Finish'},
-            {prop: 'closeButtonText', defaultVal:  '&times;'}
+            {prop: 'closeButtonText', defaultVal:  '&times;'},
+            {prop: 'constantHeight', defaultVal: true}
         ];
 
         config.forEach(function(opt) {
@@ -181,8 +197,31 @@
     };
 
     SlideTutorial.prototype._createSlides = function() {
-        this.el.querySelector('.slide-tutorial-slides')
-            .innerHTML = this._slidesContainerContent();
+        var slidesElem = this.el.querySelector('.slide-tutorial-slides'),
+            slideContentElems,
+            largestHeight = 0,
+            contentHeight, childs, i;
+        
+        slidesElem.innerHTML = this._slidesContainerContent();
+
+        if (this.constantHeight) {
+            this.activateChildren(slidesElem);
+            slideContentElems = Array.prototype.slice.call(this.el.querySelectorAll('.slide-tutorial-slide-bottom'));
+
+            slideContentElems.forEach(function(slideContentElem, i) {
+                contentHeight = slideContentElem.getBoundingClientRect().height;
+                if (contentHeight > largestHeight) {
+                    largestHeight = contentHeight;
+                }
+            }.bind(this));
+
+            slideContentElems.forEach(function(slideContentElem, i) {
+                this.setDimension(slideContentElem, 'height', largestHeight);
+            }.bind(this));
+
+            this.clearActiveChildren(slidesElem);
+        }
+
         return;
     };
 

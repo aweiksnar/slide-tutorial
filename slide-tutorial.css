@@ -1,5 +1,6 @@
 .slide-tutorial {
-    display: none;
+    height: 0;
+    overflow: hidden;
     width: 100%;
     background: rgba(120, 120, 120, 0.7);
     position: fixed;
@@ -11,7 +12,7 @@
 }
 
 .slide-tutorial.active {
-    display: block;
+    height: auto;
 }
 
 .slide-tutorial .slide-tutorial-slide {
@@ -59,8 +60,6 @@
     width: 100%;
     overflow: auto;
     margin: 10px 0;
-    position: absolute;
-    bottom: 0;
 }
 
 .slide-tutorial .slide-tutorial-container .slide-tutorial-dots .slide-tutorial-dot {
@@ -80,8 +79,6 @@
 .slide-tutorial .slide-tutorial-container .slide-tutorial-button-container {
     width: 100%;
     text-align: center;
-    position: absolute;
-    bottom: 30px;
 }
 
 .slide-tutorial .slide-tutorial-container .slide-tutorial-button-container .slide-tutorial-next-button {
