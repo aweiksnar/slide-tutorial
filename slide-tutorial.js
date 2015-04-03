@@ -84,14 +84,12 @@
     }
 
     SlideTutorial.prototype.addClass = function(className, elem) {
-        if (!!~elem.className.indexOf(className)) return;
-        elem.className += (' ' + className);
+        elem.classList.add(className)
         return;
     };
 
     SlideTutorial.prototype.removeClass = function(className, elem) {
-        var elem = elem;
-        elem.className = elem.className.replace(className, '');
+        elem.classList.remove(className)
         return;
     };
 
