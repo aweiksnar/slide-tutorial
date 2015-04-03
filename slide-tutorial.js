@@ -162,7 +162,8 @@
 
     /* Private : initialization / element creation */
     SlideTutorial.prototype._valOrDefault = function(val, def) {
-        return((val) ? val : def);
+        var valIsDefined = (val !== null && (typeof val) !== "undefined")
+        return(valIsDefined ? val : def);
     };
 
     SlideTutorial.prototype._setConfig = function(opts) {
