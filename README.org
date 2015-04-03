@@ -24,7 +24,7 @@ slideTutorial.start()
 *** Customize:
 
 Pass in optional 'nextButtonText', 'finishButtonText', and 'closeButtonText' keys to the constructor to override the default text. 
-These set the innerHTML directly, so feel free to pass in icons and other tags as well.
+These set the innerHTML directly, so feel free to pass in icons and other tags as well. 'constantHeight can also be set to ensure slides are all the same height for variable content lengths.
 
 #+begin_src javascript
 var slideTutorial = new SlideTutorial({
@@ -35,7 +35,8 @@ var slideTutorial = new SlideTutorial({
   ], 
   nextButtonText: 'Continue', 
   finishButtonText: 'Get Started',
-  closeButtonText: 'Exit'
+  closeButtonText: 'Exit',
+  constantHeight: true
 });
 #+end_src
 
