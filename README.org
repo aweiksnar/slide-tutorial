@@ -40,7 +40,5 @@ var slideTutorial = new SlideTutorial({
 });
 #+end_src
 
-*** Examples: 
-[[https://github.com/aweiksnar/slide-tutorial/blob/master/example/default.html][default]]
-or
-[[https://github.com/aweiksnar/slide-tutorial/blob/master/example/custom.html][with custom css]]
+*** Example:
+`npm run build && open ./example/custom.html`
