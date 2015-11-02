@@ -156,13 +156,13 @@
                         `<button type='button' class='slide-tutorial-close-button'>`,
                             closeButtonText,
                         `</button>`,
-                    `<div class='slide-tutorial-slides'></div>`,
-                    `<div class='slide-tutorial-button-container'>`,
-                         `<button type='button' class='slide-tutorial-next-button'>`,
-                            nextButtonText,
-                        `</button>`,
-                    `</div>`,
-                    `<div class='slide-tutorial-dots'></div>`,
+                        `<div class='slide-tutorial-slides'></div>`,
+                        `<div class='slide-tutorial-button-container'>`,
+                             `<button type='button' class='slide-tutorial-next-button'>`,
+                                nextButtonText,
+                            `</button>`,
+                        `</div>`,
+                        `<div class='slide-tutorial-dots'></div>`,
                     `</div>`].join('')
         }
     }

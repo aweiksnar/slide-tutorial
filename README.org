@@ -41,4 +41,7 @@ var slideTutorial = new SlideTutorial({
 #+end_src
 
 *** Example:
-`npm run build && open ./example/custom.html`
+
+#+begin_src
+npm run build && open ./example/custom.html
+#+end_src
